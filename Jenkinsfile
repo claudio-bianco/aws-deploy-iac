@@ -26,20 +26,17 @@ pipeline {
                 '''
             }
         }
-//        stage ('push artifact') {
-//            steps {
-//                    sh 'mkdir archive15'
-//                    sh 'echo test > archive15/test15.txt'
-//                    sh 'zip -r test15.zip archive15'
-//                //  zip zipFile: 'test9.zip', archive: false, dir: 'archive9'
-//                    sh 'ls'
-//                    sh 'cd $WORKSPACE/archive15 && ls'
-//                    sh 'aws s3 ls'
-//                    sh 'aws s3 cp $WORKSPACE/test15.zip s3://create-lambda-from-zip-file/'
-//                //  sh 'aws s3 cp $WORKSPACE/archive5 s3://create-lambda-from-zip-file/ --recursive --include "*"'                
-//                    archiveArtifacts artifacts: 'test15.zip', fingerprint: true
-//            }
-//        }      
+        stage ('push artifact') {
+            steps {
+                    sh 'zip -r test15.zip src'
+                //  zip zipFile: 'test9.zip', archive: false, dir: 'archive9'
+                    sh 'ls'
+                    sh 'cd $WORKSPACE/src && ls'
+                    sh 'aws s3 ls'
+                    sh 'aws s3 cp $WORKSPACE/test15.zip s3://create-lambda-from-zip-file/'               
+                    archiveArtifacts artifacts: 'test15.zip', fingerprint: true
+            }
+        }      
 //        stage('new pull artifact new') {
 //            steps {                
 //                    copyArtifacts filter: 'test13.zip', fingerprintArtifacts: true, projectName: env.JOB_NAME, selector: specific(env.BUILD_NUMBER)
