@@ -15,7 +15,9 @@ pipeline {
                 echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 echo "Current branch: ${env.BRANCH_NAME}"
                 sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_ID --password-stdin'
-                BUILD_ID = ${env.BUILD_ID}
+                script {
+                    BUILD_ID = ${env.BUILD_ID}
+                }
             }
         }
         stage('AWS') {           
