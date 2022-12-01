@@ -6,7 +6,7 @@ pipeline {
         DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
         AWS_DEFAULT_REGION="us-east-1"
         THE_BUTLER_SAYS_SO=credentials('cmb-aws-cred')
-        BUILD_ID = ${env.BUILD_ID}
+        BUILD_ID = "${env.BUILD_ID}"
     }
 
     stages {
