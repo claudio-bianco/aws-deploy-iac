@@ -28,12 +28,8 @@ pipeline {
         }
         stage ('push artifact') {
             steps {
-                    sh 'zip -r test15.zip src'
-                //  zip zipFile: 'test9.zip', archive: false, dir: 'archive9'
-                    sh 'ls'
-                    sh 'cd $WORKSPACE/src && ls'
-                    sh 'aws s3 ls'
-                    sh 'aws s3 cp $WORKSPACE/test15.zip s3://create-lambda-from-zip-file/'               
+                    sh 'zip -r index-${env.BUILD_ID}.zip src'
+                    sh 'aws s3 cp $WORKSPACE/index-${env.BUILD_ID}.zip s3://create-lambda-from-zip-file/'
                     archiveArtifacts artifacts: 'test15.zip', fingerprint: true
             }
         }      
