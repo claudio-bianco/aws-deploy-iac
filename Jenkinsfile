@@ -6,6 +6,7 @@ pipeline {
         DOCKER_PASSWORD = credentials('DOCKER_PASSWORD')
         AWS_DEFAULT_REGION="us-east-1"
         THE_BUTLER_SAYS_SO=credentials('cmb-aws-cred')
+        BUILD_ID = ${env.BUILD_ID}
     }
 
     stages {
@@ -15,9 +16,6 @@ pipeline {
                 echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 echo "Current branch: ${env.BRANCH_NAME}"
                 sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_ID --password-stdin'
-                script {
-                    BUILD_ID = ${env.BUILD_ID}
-                }
             }
         }
         stage('AWS') {           
