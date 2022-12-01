@@ -15,6 +15,7 @@ pipeline {
                 echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
                 echo "Current branch: ${env.BRANCH_NAME}"
                 sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_ID --password-stdin'
+                BUILD_ID = ${env.BUILD_ID}
             }
         }
         stage('AWS') {           
@@ -28,9 +29,9 @@ pipeline {
         }
         stage ('push artifact') {
             steps {
-                    sh 'zip -r index-${env.BUILD_ID}.zip src'
-                    sh 'aws s3 cp $WORKSPACE/index-${env.BUILD_ID}.zip s3://create-lambda-from-zip-file/'
-                    archiveArtifacts artifacts: 'index-${env.BUILD_ID}.zip', fingerprint: true
+                    sh 'zip -r index-${BUILD_ID}.zip src'
+                    sh 'aws s3 cp $WORKSPACE/index-${BUILD_ID}.zip s3://create-lambda-from-zip-file/'
+                    archiveArtifacts artifacts: 'index-${BUILD_ID}.zip', fingerprint: true
             }
         }      
 //        stage('new pull artifact new') {
