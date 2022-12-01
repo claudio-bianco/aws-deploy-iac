@@ -31,7 +31,7 @@ pipeline {
             steps {
                     sh 'zip -r index-${BUILD_ID}.zip src'
                     sh 'aws s3 cp $WORKSPACE/index-${BUILD_ID}.zip s3://create-lambda-from-zip-file/'
-                    archiveArtifacts artifacts: 'index-${BUILD_ID}.zip', fingerprint: true
+                    // archiveArtifacts artifacts: 'index-${BUILD_ID}.zip', fingerprint: true
             }
         }      
 //        stage('new pull artifact new') {
