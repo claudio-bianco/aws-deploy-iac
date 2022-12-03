@@ -49,7 +49,7 @@ pipeline {
                 // sh 'aws cloudformation create-stack --stack-name lambdafroms3bucket --region us-east-1 --template-body file://lambda.yml --parameters file://param.json --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM '
                 // sh 'aws cloudformation create-stack --stack-name LambdaFromBucket --region us-east-1 --template-body file://lambda.yaml --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM '
                 // sh 'aws cloudformation create-change-set --stack-name LambdaFromBucket --change-set-name LambdaFromBucket-${BUILD_ID} --region us-east-1 --template-body file://lambda.yaml --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM '
-                sh './create-stack.sh LambdaFromBucket LambdaFromBucket-${BUILD_ID} lambda.yaml param.json'
+                sh 'sudo ./create-stack.sh LambdaFromBucket LambdaFromBucket-${BUILD_ID} lambda.yaml param.json'
             }
         }
     }
