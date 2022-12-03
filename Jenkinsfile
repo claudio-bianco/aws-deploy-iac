@@ -53,8 +53,8 @@ pipeline {
                 // sh 'aws cloudformation create-change-set --stack-name LambdaFromBucket --change-set-name LambdaFromBucket-${BUILD_ID} --region us-east-1 --template-body file://lambda.yaml --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM '
                 
                 echo "Updating parameters file..."
-                sh ' sed -i 's/index.zip/index-${BUILD_ID}.zip/' ${PARAMETERS_DEV_FILE} '
-                sh ' cat ${PARAMETERS_DEV_FILE} '
+                sh (""" sed -i 's/index.zip/index-${BUILD_ID}.zip/' ${PARAMETERS_DEV_FILE} """)
+                sh (""" cat ${PARAMETERS_DEV_FILE} """)
                 
                 sh 'chmod +x -R ${env.WORKSPACE}'
                 sh 'sudo ./create-stack.sh LambdaFromBucket LambdaFromBucket-${BUILD_ID} lambda.yaml ${PARAMETERS_DEV_FILE}'
