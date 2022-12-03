@@ -1,0 +1,6 @@
+[
+    {
+        "ParameterKey": "LambdaVersion",
+        "ParameterValue": "index.zip"
+    }
+]
