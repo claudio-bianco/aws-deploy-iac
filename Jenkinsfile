@@ -30,7 +30,7 @@ pipeline {
         stage ('push artifact') {
             steps {
                     sh 'zip -r index-${BUILD_ID}.zip src'
-                    sh 'aws s3 cp $WORKSPACE/index-${BUILD_ID}.zip s3://create-lambda-from-zip-file/'
+                    sh 'aws s3 cp $WORKSPACE/index-${BUILD_ID}.zip s3://create-lambda-from-zip-file/deploy/'
                     // archiveArtifacts artifacts: 'index-${BUILD_ID}.zip', fingerprint: true
             }
         }      
