@@ -57,9 +57,9 @@ pipeline {
                 sh (""" sed -i 's/index.zip/index-${BUILD_ID}.zip/' ${PARAMETERS_DEV_FILE} """)
                 sh (""" cat ${PARAMETERS_DEV_FILE} """)
                 
-                sh 'chmod +x -R ${env.WORKSPACE}'
+                // sh 'chmod +x -R ${env.WORKSPACE}'
                 // sh 'sudo chmod -R 777 ./test.sh'
-                sh (""" /bin/bash ./test.sh LambdaFromBucket LambdaFromBucket-${BUILD_ID} LambdaFromBucket LambdaFromBucket """)
+                sh "/bin/bash ./test.sh LambdaFromBucket LambdaFromBucket-${BUILD_ID} LambdaFromBucket LambdaFromBucket"
                 // sh './create-stack.sh LambdaFromBucket LambdaFromBucket-${BUILD_ID} lambda.yaml ${PARAMETERS_DEV_FILE}'
             }
         }
