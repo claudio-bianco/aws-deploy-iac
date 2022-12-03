@@ -1,3 +1,8 @@
+Parameters:
+
+  LambdaVersion:
+    Type: String
+
 Resources:
   LambdaFunction:
     Type: 'AWS::Lambda::Function'
@@ -9,7 +14,7 @@ Resources:
       MemorySize: 1024
       Code: 
         S3Bucket: create-lambda-from-zip-file
-        S3Key: index.zip
+        S3Key: !Sub 'deploy/${LambdaVersion}.zip'
   LambdaFunctionRole:
     Type: AWS::IAM::Role
     Properties:
