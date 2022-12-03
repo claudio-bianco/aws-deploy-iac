@@ -58,8 +58,9 @@ pipeline {
                 sh (""" cat ${PARAMETERS_DEV_FILE} """)
                 
                 sh 'chmod +x -R ${env.WORKSPACE}'
-                sh 'sudo chmod -R 777 ./test.sh'
-                sh './create-stack.sh LambdaFromBucket LambdaFromBucket-${BUILD_ID} lambda.yaml ${PARAMETERS_DEV_FILE}'
+                // sh 'sudo chmod -R 777 ./test.sh'
+                sh './test.sh LambdaFromBucket LambdaFromBucket-${BUILD_ID} lambda.yaml ${PARAMETERS_DEV_FILE}'
+                // sh './create-stack.sh LambdaFromBucket LambdaFromBucket-${BUILD_ID} lambda.yaml ${PARAMETERS_DEV_FILE}'
             }
         }
     }
