@@ -6,7 +6,7 @@ exports.handler = async (event) => {
 
         statusCode: 200,
 
-        body: JSON.stringify('CloudFormation deployment successful! v2'),
+        body: JSON.stringify('CloudFormation deployment successful! v3'),
 
      };
 
