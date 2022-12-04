@@ -45,7 +45,7 @@ pipeline {
 //                    sh 'cat archive_new/test13.txt'                
 //            }
 //        }        
-        stage('Deploy') {
+        stage('Create Change') {
             steps {
                 echo 'Removing unused docker containers and images..'
                 // sh "aws cloudformation create-stack --stack-name s3bucket --template-body file://simplests3cft.json --region 'us-east-1'"
@@ -57,11 +57,15 @@ pipeline {
                 sh (""" sed -i 's/index.zip/index-${BUILD_ID}.zip/' ${PARAMETERS_DEV_FILE} """)
                 sh (""" cat ${PARAMETERS_DEV_FILE} """)
                 
-                // sh 'chmod +x -R ${env.WORKSPACE}'
-                // sh 'sudo chmod -R 777 ./test.sh'
-                // sh "/bin/bash ./test.sh LambdaFromBucket LambdaFromBucket-${BUILD_ID} LambdaFromBucket LambdaFromBucket"
                 sh '/bin/bash ./create-stack.sh LambdaFromBucket LambdaFromBucket-${BUILD_ID} lambda.yaml ${PARAMETERS_DEV_FILE}'
             }
         }
+        stage('Execute Change') {
+            steps {
+                echo 'Removing unused docker containers and images..'
+
+                sh '/bin/bash ./execute-change.sh LambdaFromBucket LambdaFromBucket-${BUILD_ID}'
+            }
+        }        
     }
 }
