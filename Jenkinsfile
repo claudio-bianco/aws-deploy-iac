@@ -63,6 +63,7 @@ pipeline {
         stage('Execute Change') {
             steps {
                 echo 'Removing unused docker containers and images..'
+                sh 'sleep 30'
 
                 sh '/bin/bash ./execute-change.sh LambdaFromBucket LambdaFromBucket-${BUILD_ID}'
             }
